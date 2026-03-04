@@ -306,8 +306,10 @@ body::after {
 }
 
 .placeholder {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  height: auto;
   border-radius: 12px;
   background: repeating-linear-gradient(
     45deg,
@@ -320,8 +322,10 @@ body::after {
 }
 
 .product-image {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  height: auto;
   object-fit: cover;
   border-radius: 12px;
   border: 1px solid var(--border);
@@ -402,6 +406,7 @@ body::after {
 .product-details > .product-image,
 .product-details > .placeholder {
   display: block;
+  width: 100%;
 }
 
 .characteristics {
