@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Puzzle Store</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://widget.cloudpayments.ru/bundles/cloudpayments.js"></script>
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header__inner">
+        <div class="logo">Puzzle Store</div>
+        <a class="header__link" href="#products">Каталог</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="carousel" aria-label="Промо-баннеры">
+        <div class="carousel__track" id="carousel-track">
+          <article class="banner">
+            <h2>Новые коллекции каждый месяц</h2>
+            <p>Подборки головоломок для новичков и опытных игроков.</p>
+          </article>
+          <article class="banner">
+            <h2>Премиальные головоломки</h2>
+            <p>От базовых моделей до коллекционных наборов.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="products" class="products">
+        <h1>Все товары</h1>
+        <div class="products__grid" id="products-grid"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__col">
+            <p class="footer__title">Реквизиты</p>
+            <p class="footer__line">ООО "Пазл Стор"</p>
+            <p class="footer__line">ИНН 7705123456</p>
+            <p class="footer__line">КПП 770501001</p>
+            <p class="footer__line">ОГРН 1207700123456</p>
+          </div>
+          <div class="footer__col">
+            <p class="footer__title">Контакты</p>
+            <p class="footer__line">+7 (495) 123-45-67</p>
+            <p class="footer__line">support@puzzlestore.ru</p>
+            <p class="footer__line">Пн-Пт: 09:00-20:00</p>
+            <p class="footer__line">Сб-Вс: 10:00-18:00</p>
+          </div>
+          <div class="footer__col">
+            <p class="footer__title">Покупателям</p>
+            <p class="footer__line">Доставка по РФ и СНГ</p>
+            <p class="footer__line">Возврат в течение 14 дней</p>
+            <p class="footer__line">Гарантия на товары - 12 месяцев</p>
+            <p class="footer__line">Юр. адрес: г. Москва, ул. Летниковская, д. 10, стр. 4</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="dolyame-sticky" aria-label="Информация об оплате Долями">
+      <div class="container dolyame-sticky__inner">
+        <div class="dolyame-sticky__text">Купите сегодня, а заплатите только часть</div>
+        <img
+          class="dolyame-sticky__logo dolyame-sticky__logo--desktop"
+          src="/logo/Branding%20badge.svg"
+          alt="Долями"
+        />
+        <img
+          class="dolyame-sticky__logo dolyame-sticky__logo--mobile"
+          src="/logo/Dolyame%20small%20logo.svg"
+          alt="Долями"
+        />
+      </div>
+    </div>
+  </body>
+</html>
