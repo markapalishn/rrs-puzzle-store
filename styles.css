@@ -279,6 +279,7 @@ body::after {
   flex-direction: column;
   gap: 10px;
   overflow: hidden;
+  width: 100%;
   max-width: 528px;
   margin: 0 auto;
   box-shadow: 0 14px 30px rgba(20, 20, 20, 0.05);
@@ -288,13 +289,15 @@ body::after {
 .card .placeholder {
   display: block;
   margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
 }
 
 .card h3,
 .card .price,
 .card .muted {
-  width: 500px;
-  max-width: 100%;
+  width: 100%;
+  max-width: none;
   margin-left: auto;
   margin-right: auto;
 }
@@ -307,7 +310,7 @@ body::after {
 
 .placeholder {
   width: 100%;
-  max-width: 500px;
+  max-width: 100%;
   aspect-ratio: 1 / 1;
   height: auto;
   border-radius: 12px;
@@ -323,7 +326,7 @@ body::after {
 
 .product-image {
   width: 100%;
-  max-width: 500px;
+  max-width: 100%;
   aspect-ratio: 1 / 1;
   height: auto;
   object-fit: cover;
@@ -398,7 +401,7 @@ body::after {
   margin: 26px 0;
   padding: 20px;
   display: grid;
-  grid-template-columns: 500px 1fr;
+  grid-template-columns: minmax(280px, 500px) minmax(0, 1fr);
   gap: 24px;
   align-items: start;
 }
@@ -407,6 +410,7 @@ body::after {
 .product-details > .placeholder {
   display: block;
   width: 100%;
+  max-width: 500px;
 }
 
 .characteristics {
@@ -637,7 +641,7 @@ body::after {
 }
 
 .card__actions {
-  width: 500px;
+  width: 100%;
   max-width: 100%;
   margin: 0 auto;
   display: flex;
