@@ -10,6 +10,8 @@ const getPaymentsWidget = () => {
   return new window.cp.CloudPayments();
 };
 
+const getPageUrl = (filename) => new URL(`./${filename}`, window.location.href).href;
+
 const buildIntentParams = (product, dolyameOnly = false) => {
   const params = {
     publicTerminalId: "test_api_00000000000000000000002",
@@ -24,8 +26,8 @@ const buildIntentParams = (product, dolyameOnly = false) => {
       accountId: product.id,
       email: ""
     },
-    successRedirectUrl: `${window.location.origin}/success.html`,
-    failRedirectUrl: `${window.location.origin}/fail.html`
+    successRedirectUrl: getPageUrl("success.html"),
+    failRedirectUrl: getPageUrl("fail.html")
   };
 
   if (dolyameOnly) {
@@ -58,10 +60,23 @@ const getInstallmentText = (price) => {
   return `4 платежа по ${formatRub(installmentAmount)}`;
 };
 
+const loadProducts = async () => {
+  try {
+    const apiResponse = await fetch("./api/products");
+    if (apiResponse.ok) return await apiResponse.json();
+  } catch (_error) {}
+
+  const staticResponse = await fetch("./data/products.json");
+  if (!staticResponse.ok) {
+    throw new Error("Не удалось загрузить список товаров");
+  }
+
+  return staticResponse.json();
+};
+
 const renderProducts = async () => {
   const grid = document.getElementById("products-grid");
-  const response = await fetch("/api/products");
-  const products = await response.json();
+  const products = await loadProducts();
 
   grid.innerHTML = products
     .map(
@@ -76,10 +91,10 @@ const renderProducts = async () => {
         <p class="muted">${product.description}</p>
         <p class="price">${formatRub(product.price)}</p>
         <div class="card__actions">
-          <a class="btn btn--primary" href="/product/${product.id}">Подробнее</a>
+          <a class="btn btn--primary" href="./product.html?id=${encodeURIComponent(product.id)}">Подробнее</a>
           <button class="dolyame-pay-btn" type="button" data-dolyame-id="${product.id}">
             <span class="dolyame-pay-btn__badge">
-              <img src="/logo/Branding%20badge%E2%80%93white.svg" alt="Долями" />
+              <img src="./logo/Branding%20badge%E2%80%93white.svg" alt="Долями" />
             </span>
             <span class="dolyame-pay-btn__text">${getInstallmentText(product.price)}</span>
             <span class="dolyame-pay-btn__arrow" aria-hidden="true">›</span>

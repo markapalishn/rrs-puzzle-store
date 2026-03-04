@@ -1,0 +1,54 @@
+[
+  {
+    "id": "puzzle-cube-mini",
+    "name": "Куб-головоломка Color Matrix 5x5",
+    "price": 2890,
+    "description": "Яркий многослойный куб с увеличенным числом элементов для продвинутых сборок.",
+    "characteristics": [
+      "Материал: ABS-пластик",
+      "Формат: 5x5",
+      "Сложность: 4/5",
+      "Возраст: 12+"
+    ],
+    "image": "./photo/Rectangle.png"
+  },
+  {
+    "id": "puzzle-labyrinth-pro",
+    "name": "Пазл Mosaic 1000 деталей",
+    "price": 1490,
+    "description": "Минималистичный пазл с геометрическим рисунком из 1000 элементов.",
+    "characteristics": [
+      "Материал: плотный картон",
+      "Количество деталей: 1000",
+      "Сложность: 3/5",
+      "Возраст: 10+"
+    ],
+    "image": "./photo/Rectangle-1.png"
+  },
+  {
+    "id": "puzzle-metal-lock",
+    "name": "Арт-пазл Northern Fragments",
+    "price": 3290,
+    "description": "Коллекционный арт-пазл с абстрактным горным пейзажем и насыщенной палитрой.",
+    "characteristics": [
+      "Материал: дизайнерский картон",
+      "Серия: Art Collection",
+      "Сложность: 4/5",
+      "Возраст: 14+"
+    ],
+    "image": "./photo/Rectangle-2.png"
+  },
+  {
+    "id": "puzzle-wood-master",
+    "name": "Кубик Рубика Classic 3x3",
+    "price": 990,
+    "description": "Классическая скоростная головоломка 3x3 с плавным ходом и яркими цветами граней.",
+    "characteristics": [
+      "Материал: ABS-пластик",
+      "Формат: 3x3",
+      "Сложность: 2/5",
+      "Возраст: 8+"
+    ],
+    "image": "./photo/Rectangle-3.png"
+  }
+]

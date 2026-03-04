@@ -6,14 +6,20 @@ const formatRub = (value) =>
   }).format(value);
 
 const getProductId = () => {
-  const chunks = window.location.pathname.split("/");
-  return chunks[chunks.length - 1];
+  const params = new URLSearchParams(window.location.search);
+  const fromQuery = params.get("id");
+  if (fromQuery) return fromQuery;
+
+  const chunks = window.location.pathname.split("/").filter(Boolean);
+  return chunks[chunks.length - 1] || "";
 };
 
 const getPaymentsWidget = () => {
   if (!window.cp || !window.cp.CloudPayments) return null;
   return new window.cp.CloudPayments();
 };
+
+const getPageUrl = (filename) => new URL(`./${filename}`, window.location.href).href;
 
 const buildIntentParams = (product, dolyameOnly = false) => {
   const params = {
@@ -29,8 +35,8 @@ const buildIntentParams = (product, dolyameOnly = false) => {
       accountId: product.id,
       email: ""
     },
-    successRedirectUrl: `${window.location.origin}/success.html`,
-    failRedirectUrl: `${window.location.origin}/fail.html`
+    successRedirectUrl: getPageUrl("success.html"),
+    failRedirectUrl: getPageUrl("fail.html")
   };
 
   if (dolyameOnly) {
@@ -63,17 +69,39 @@ const getInstallmentText = (price) => {
   return `4 платежа по ${formatRub(installmentAmount)}`;
 };
 
+const loadProducts = async () => {
+  try {
+    const apiResponse = await fetch("./api/products");
+    if (apiResponse.ok) return await apiResponse.json();
+  } catch (_error) {}
+
+  const staticResponse = await fetch("./data/products.json");
+  if (!staticResponse.ok) {
+    throw new Error("Не удалось загрузить список товаров");
+  }
+
+  return staticResponse.json();
+};
+
+const getProductById = async (id) => {
+  try {
+    const apiResponse = await fetch(`./api/products/${encodeURIComponent(id)}`);
+    if (apiResponse.ok) return await apiResponse.json();
+  } catch (_error) {}
+
+  const products = await loadProducts();
+  return products.find((item) => item.id === id) || null;
+};
+
 const renderProduct = async () => {
   const id = getProductId();
   const target = document.getElementById("product-details");
+  const product = await getProductById(id);
 
-  const response = await fetch(`/api/products/${id}`);
-  if (!response.ok) {
+  if (!product) {
     target.innerHTML = "<p>Товар не найден.</p>";
     return;
   }
-
-  const product = await response.json();
 
   target.innerHTML = `
     ${
@@ -87,13 +115,13 @@ const renderProduct = async () => {
       <p class="price">${formatRub(product.price)}</p>
       <h3>Характеристики</h3>
       <ul class="characteristics">
-        ${product.characteristics.map((item) => `<li>${item}</li>`).join("")}
+        ${(product.characteristics || []).map((item) => `<li>${item}</li>`).join("")}
       </ul>
       <div class="row">
         <button class="btn btn--ghost" id="checkout-btn">Оплатить</button>
         <button class="dolyame-pay-btn" type="button" id="dolyame-btn">
           <span class="dolyame-pay-btn__badge">
-            <img src="/logo/Branding%20badge%E2%80%93white.svg" alt="Долями" />
+            <img src="./logo/Branding%20badge%E2%80%93white.svg" alt="Долями" />
           </span>
           <span class="dolyame-pay-btn__text">${getInstallmentText(product.price)}</span>
           <span class="dolyame-pay-btn__arrow" aria-hidden="true">›</span>
